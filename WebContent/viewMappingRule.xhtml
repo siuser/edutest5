@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+
+<head>
+<title>View Interpretation Rule</title>
+<!--<h:outputStylesheet name="css/myStyle.css" />
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myStyle.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/myStyle.css" />  -->
+<link rel="stylesheet" type="text/css" href="resources/css/myStyle.css" />
+
+</head>
+
+
+
+<body>
+	<p>
+		<h:link value="Home" outcome="index.xhtml" />
+	</p>
+	<h:form id="viewMappingRuleId">
+		<h2>View Mapping Rule</h2>
+		<p></p>
+
+
+		<h:panelGrid id="panelGridMarketRuleId" columns="3"
+			columnClasses="titleCell">
+
+			<h:outputLabel for="idId" value="Id:" />
+			<h:outputText id="idId"
+				value="#{mappingRuleController.mappingRule.idEvaluationRule}">
+			</h:outputText>
+
+
+		</h:panelGrid>
+
+
+	</h:form>
+
+	<p></p>
+
+
+
+
+
+
+
+</body>
+</html>

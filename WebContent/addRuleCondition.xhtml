@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<head>
+<title>View Interpretation Rule</title>
+<!--<h:outputStylesheet name="css/myStyle.css" />
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myStyle.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/myStyle.css" />  -->
+<link rel="stylesheet" type="text/css" href="resources/css/myStyle.css" />
+
+</head>
+
+<body>
+	<p>
+		<h:link value="Home" outcome="index.xhtml" />
+	</p>
+
+	<h:form id="addRuleConditionId">
+		<h2>View Interpretation Rule</h2>
+		<p></p>
+		<h:outputLabel for="panelGridMarketRuleId" value="Market Rule:" />
+		<h:panelGrid id="panelGridMarketRuleId" columns="2"
+			columnClasses="titleCell">
+
+			<h:outputLabel for="idId" value="Id:" />
+			<h:outputText id="idId"
+				value="#{newInterpretationRule.idEvaluationRule}">
+			</h:outputText>
+
+			<h:outputLabel for="countryNumberId" value="Country number:" />
+			<h:outputText id="countryNumberId"
+				value="#{newInterpretationRule.marketRule.countryNumber}">
+			</h:outputText>
+
+			<h:outputLabel for="branchId" value="Branch:" />
+			<h:outputText id="branchId"
+				value="#{newInterpretationRule.marketRule.branch}">
+			</h:outputText>
+
+			<h:outputLabel for="stockCategoryId" value="Stock category:" />
+			<h:outputText id="stockCategoryId"
+				value="#{newInterpretationRule.marketRule.stockCategory}">
+			</h:outputText>
+
+		</h:panelGrid>
+
+
+
+
+		<p></p>
+
+
+		<h:outputLabel for="conditionsDataTableId" value="Conditions:" />
+		<h:dataTable id="conditionsDataTableId" styleClass="simpletablestyle"
+			value="#{newInterpretationRule.getRuleConditions()}" var="_item">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Vehicle attribute" />
+				</f:facet>
+				<!--   <h:link outcome="viewCondition">
+				<f:param name="id" value="#{_item.idRuleCondition}" />-->
+				<h:outputText id="itemVehicleAttributeId"
+					value="#{_item.vehicleAttribute}" />
+				<!-- </h:link>-->
+
+				<f:facet name="footer">
+					<h:outputLabel for="conditionVehicleAttributeId"
+						value="Vehicle Attribute:" />
+					<h:inputText id="conditionVehicleAttributeId"
+						value="#{newRuleCondition.vehicleAttribute}" />
+					<h:message for="conditionVehicleAttributeId" errorClass="invalid" />
+
+				</f:facet>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Vehicle attribute value" />
+				</f:facet>
+				<!--<h:link outcome="viewCondition">
+				<f:param name="id" value="#{_item.idRuleCondition}" />-->
+				<h:outputText id="itemVehicleAttributeValue"
+					value="#{_item.vehicleAttributeValue}" />
+				<!--</h:link>-->
+
+				<f:facet name="footer">
+
+					<h:outputLabel for="conditionVehicleAttributeValueId"
+						value="Vehicle Attribute Source:" />
+					<h:inputText id="conditionVehicleAttributeValueId"
+						value="#{newRuleCondition.vehicleAttributeValue}" />
+					<h:message for="conditionVehicleAttributeValueId"
+						errorClass="invalid" />
+
+
+
+				</f:facet>
+			</h:column>
+
+
+
+
+			<h:column footerClass="remove-column" headerClass="remove-column">
+				<f:facet name="header">Action</f:facet>
+
+				<!--  
+				<h:commandLink styleClass="remove-button"
+					 onClick="windows.alert('Not yet implemented !')">
+					<f:param name="idEvaluationRule"
+							value="#{_item.evaluationRule.idEvaluationRule}" />
+							<f:param name="idRuleCondition"
+							value="#{_item.idRuleCondition}" />
+					  <h:graphicImage value="resources/gfx/Icon-remove-22x22.png" />
+					
+
+				</h:commandLink>
+				-->
+
+
+				<f:facet name="footer">
+					<h:commandLink
+						action="#{interpretationRuleController.registerRuleCondition2()}"
+						styleClass="register">
+						<f:param name="idEvaluationRule"
+							value="#{newInterpretationRule.idEvaluationRule}" />
+						<h:graphicImage value="resources/gfx/add.png" />
+					</h:commandLink>
+				</f:facet>
+			</h:column>
+
+
+
+
+
+
+		</h:dataTable>
+		<h:outputText />
+
+
+
+		<h:panelGrid columns="3" columnClasses="titleCell">
+
+
+
+
+		</h:panelGrid>
+
+
+
+
+
+
+		<p></p>
+
+	</h:form>
+
+	<h:form>
+		<h:outputLabel for="activitiesDataTableId" value="Activities:" />
+		<h:dataTable id="activitiesDataTableId" styleClass="simpletablestyle"
+			value="#{newInterpretationRule.getRuleActivities()}" var="_item">
+
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Vehicle attribute" />
+				</f:facet>
+				<!--   <h:link outcome="viewactivitie">-->
+				<f:param name="id" value="#{_item.idRuleActivity}" />
+				<h:outputText id="itemVehicleAttributeId"
+					value="#{_item.vehicleAttribute}" />
+				<!-- </h:link>-->
+
+				<f:facet name="footer">
+					<h:outputLabel for="activityVehicleAttributeId"
+						value="Vehicle Attribute:" />
+					<h:inputText id="activitieVehicleAttributeId"
+						value="#{newRuleActivity.vehicleAttribute}" />
+					<h:message for="activitieVehicleAttributeId" errorClass="invalid" />
+
+				</f:facet>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Vehicle attribute value" />
+				</f:facet>
+				<!--<h:link outcome="viewCondition">-->
+				<f:param name="id" value="#{_item.idRuleActivity}" />
+				<h:outputText id="itemVehicleAttributeValue"
+					value="#{_item.vehicleAttributeValue}" />
+				<!--</h:link>-->
+
+				<f:facet name="footer">
+
+					<h:outputLabel for="activitieVehicleAttributeValueId"
+						value="Vehicle Attribute Source:" />
+					<h:inputText id="activitieVehicleAttributeValueId"
+						value="#{newRuleActivity.vehicleAttributeValue}" />
+					<h:message for="activitieVehicleAttributeValueId"
+						errorClass="invalid" />
+
+
+
+				</f:facet>
+			</h:column>
+
+			<h:column footerClass="remove-column" headerClass="remove-column">
+				<f:facet name="Action"></f:facet>
+				<!-- <h:commandLink styleClass="remove-button"
+					action="#{interpretationRuleController.removeRuleActivity()}" onClick="windows.alert('Not yet implemented !')">
+					<h:graphicImage value="resources/gfx/Icon-remove-22x22.png" />
+					<f:param name="idRuleCondition" value="#{1}" />
+
+				</h:commandLink> -->
+				<f:facet name="footer">
+					<h:commandLink
+						action="#{interpretationRuleController.registerRuleActivity2()}"
+						styleClass="register">
+						<f:param name="idEvaluationRule"
+							value="#{newInterpretationRule.idEvaluationRule}" />
+						<h:graphicImage value="resources/gfx/add.png" />
+					</h:commandLink>
+				</f:facet>
+			</h:column>
+
+
+
+		</h:dataTable>
+		<h:outputText />
+
+
+
+
+
+	</h:form>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

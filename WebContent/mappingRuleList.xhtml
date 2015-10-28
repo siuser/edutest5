@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<head>
+<title>Mapping Rules</title>
+<!--<h:outputStylesheet name="css/myStyle.css" />
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myStyle.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/myStyle.css" />  -->
+<link rel="stylesheet" type="text/css" href="resources/css/myStyle.css" />
+
+</head>
+
+<body>
+	<p>
+		<h:link value="Home" outcome="index.xhtml" />
+	</p>
+
+	<h2>Mapping rule list</h2>
+
+
+	<h:panelGroup rendered="#{empty mappingRules}">
+		<em>No registered mappingRules.</em>
+	</h:panelGroup>
+	<h:dataTable var="_mappingRule" value="#{mappingRules}"
+		rendered="#{not empty mappingRules}" styleClass="simpletablestyle">
+		<h:column>
+			<f:facet name="header">Id</f:facet>
+                #{_mappingRule.idEvaluationRule}
+        </h:column>
+
+		<h:column>
+			<f:facet name="header">Vehicle attribute </f:facet>
+                #{_mappingRule.vehicleAttribute}
+        </h:column>
+
+		<h:column>
+			<f:facet name="header">Vehicle attribute source</f:facet>
+                #{_mappingRule.vehicleAttributeSource}
+        </h:column>
+
+		<h:column>
+			<f:facet name="header">Vehicle attribute target</f:facet>
+                #{_mappingRule.vehicleAttributeTarget}
+        </h:column>
+
+		<h:column>
+			<f:facet name="header">Market rule</f:facet>
+                #{_mappingRule.marketRule}
+        </h:column>
+
+
+	</h:dataTable>
+
+
+	<p></p>
+
+	<h:form id="mappingRuleRegistration">
+
+		<h:outputLabel for="mappingRuleRegPanel" value="Add new mapping rule:" />
+		<h:panelGrid columns="3" columnClasses="titleCell" border="1"
+			bgcolor="#E6E7E8" id="mappingRuleRegPanel">
+
+
+			<h:outputLabel for="vehicleAttributeId" value="Vehicle Attribute:" />
+			<h:inputText id="vehicleAttributeId"
+				value="#{newMappingRule.vehicleAttribute}" />
+			<h:message for="vehicleAttributeId" errorClass="invalid" />
+
+			<h:outputLabel for="vehicleAttributeSourceId"
+				value="Vehicle Attribute Source:" />
+			<h:inputText id="vehicleAttributeSourceId"
+				value="#{newMappingRule.vehicleAttributeSource}" />
+			<h:message for="vehicleAttributeSourceId" errorClass="invalid" />
+
+			<h:outputLabel for="vehicleAttributeTargetId"
+				value="Vehicle Attribute Target:" />
+			<h:inputText id="vehicleAttributeTargetId"
+				value="#{newMappingRule.vehicleAttributeTarget}" />
+			<h:message for="vehicleAttributeTargetId" errorClass="invalid" />
+
+
+			<h:outputLabel for="marketRuleSelectId" value="Market rule:" />
+			<h:selectOneMenu id="marketRuleSelectId"
+				converter="omnifaces.SelectItemsConverter"
+				value="#{newMappingRule.marketRule}">
+				<f:selectItems value="#{marketRules}" />
+			</h:selectOneMenu>
+			<h:message for="marketRuleSelectId" errorClass="invalid" />
+
+			<h:outputLabel for="register" value="" />
+			<h:commandButton id="register"
+				action="#{mappingRuleController.register}" value="Register"
+				styleClass="register" />
+
+			<h:messages styleClass="messages" errorClass="invalid"
+				infoClass="valid" warnClass="warning" globalOnly="true" />
+
+
+		</h:panelGrid>
+
+
+
+
+
+
+	</h:form>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<head>
+<title>Evaluation Rules</title>
+<!--<h:outputStylesheet name="css/myStyle.css" />
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myStyle.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/myStyle.css" />  -->
+<link rel="stylesheet" type="text/css" href="resources/css/myStyle.css" />
+
+</head>
+
+<body>
+	<p>
+		<h:link value="Home" outcome="index.xhtml" />
+	</p>
+
+	<h2>Evaluation Rule</h2>
+
+	<h:form id="evaluationRuleRegistration">
+
+		<h:panelGrid columns="3" columnClasses="titleCell">
+
+
+			<h:outputLabel for="vehicleAttributeId" value="Vehicle Attribute:" />
+			<h:inputText id="vehicleAttributeId"
+				value="#{newEvaluationRule.vehicleAttribute}" />
+			<h:message for="vehicleAttributeId" errorClass="invalid" />
+
+			<h:outputLabel for="vehicleAttributeSourceId"
+				value="Vehicle Attribute Source:" />
+			<h:inputText id="vehicleAttributeSourceId"
+				value="#{newEvaluationRule.vehicleAttributeSource}" />
+			<h:message for="vehicleAttributeSourceId" errorClass="invalid" />
+
+			<h:outputLabel for="vehicleAttributeTargetId"
+				value="Vehicle Attribute Target:" />
+			<h:inputText id="vehicleAttributeTargetId"
+				value="#{newEvaluationRule.vehicleAttributeTarget}" />
+			<h:message for="vehicleAttributeTargetId" errorClass="invalid" />
+
+
+			<h:outputLabel for="marketRuleSelectId" value="Market rule:" />
+			<h:selectOneMenu id="marketRuleSelectId"
+				converter="omnifaces.SelectItemsConverter"
+				value="#{newEvaluationRule.marketRule}">
+				<f:selectItems value="#{marketRules}" />
+			</h:selectOneMenu>
+			<h:message for="marketRuleSelectId" errorClass="invalid" />
+
+
+		</h:panelGrid>
+
+		<p>
+			<h:panelGrid columns="2">
+				<h:commandButton id="register"
+					action="#{evaluationRuleController.register}" value="Register"
+					styleClass="register" />
+
+				<h:messages styleClass="messages" errorClass="invalid"
+					infoClass="valid" warnClass="warning" globalOnly="true" />
+			</h:panelGrid>
+		</p>
+	</h:form>
+
+	<h:form id="evaluateFormId">
+
+		<h:commandButton id="evaluate"
+			action="#{evaluationController.evaluate}" value="Evaluate"
+			styleClass="register" />
+	</h:form>
+
+
+
+	<h2>EvaluationRules</h2>
+	<h:panelGroup rendered="#{empty evaluationRules}">
+		<em>No registered evaluationRules.</em>
+	</h:panelGroup>
+	<h:dataTable var="_evaluationRule" value="#{evaluationRules}"
+		rendered="#{not empty evaluationRules}" styleClass="simpletablestyle">
+		<h:column>
+			<f:facet name="header">Id</f:facet>
+                #{_evaluationRule.idEvaluationRule}
+            </h:column>
+
+
+
+		<h:column>
+			<f:facet name="header">REST URL</f:facet>
+			<a
+				href="#{request.contextPath}/rest/evaluationRules/#{_evaluationRule.idEvaluationRule}">/rest/evaluationRules/#{_evaluationRule.idEvaluationRule}</a>
+		</h:column>
+		<f:facet name="footer">
+            REST URL for all evaluationRules: <a
+				href="#{request.contextPath}/rest/evaluationRules">/rest/evaluationRules</a>
+		</f:facet>
+	</h:dataTable>
+
+
+
+</body>
+</html>
